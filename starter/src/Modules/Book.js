@@ -5,10 +5,9 @@ import {useEffect, useState} from "react";
 function Book({book}){
     const [category,setCategory] = useState(book.shelf)
     useEffect(()=>{
-        console.log(category)
        const update = async ()=>BookApi.update(book,category);
        update();
-    })
+    },[category])
     return (
         <div className="book">
             <div className="book-top">
@@ -21,7 +20,7 @@ function Book({book}){
                     }}
                 ></div>
                 <div className="book-shelf-changer">
-                    <select onChange={e=>setCategory(e.target.value)}>
+                    <select value={"none"} onChange={e=>setCategory(e.target.value)}>
                         <option value="none" disabled>
                             Move to...
                         </option>
