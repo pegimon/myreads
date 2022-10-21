@@ -1,12 +1,12 @@
 import './List_books.css'
 import Book from "./Book";
 
-function List_books({list}){
+function List_books({list,param}){
     return (
         <ol className="books-grid">
-            {list.map(e=>
+            {list.map(e =>
                 <li key={e.id}>
-                    <Book book={e}/>
+                    <Book book={e} param={param}/>
                 </li>
             )}
         </ol>

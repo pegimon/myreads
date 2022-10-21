@@ -2,11 +2,25 @@ import './Book.css'
 import * as BookApi from '../BooksAPI'
 import {useEffect, useState} from "react";
 
-function Book({book}){
+
+function Book({book,param}){
     const [category,setCategory] = useState(book.shelf)
+    const fun = (e)=>{
+        setCategory(e.target.value)
+        param(e.target.value)
+    }
+    const update = async ()=>await BookApi.update(book,category);
+
     useEffect(()=>{
-       const update = async ()=>BookApi.update(book,category);
-       update();
+       try {
+           update();
+       }catch (err){
+           console.log("error")
+       }
+       return ()=>{
+
+       }
+
     },[category])
     return (
         <div className="book">
@@ -20,7 +34,7 @@ function Book({book}){
                     }}
                 ></div>
                 <div className="book-shelf-changer">
-                    <select value={"none"} onChange={e=>setCategory(e.target.value)}>
+                    <select value={"none"} onChange={e=>fun(e)}>
                         <option value="none" disabled>
                             Move to...
                         </option>
