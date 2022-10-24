@@ -5,23 +5,26 @@ import {useEffect, useState} from "react";
 
 function Book({book,param}){
     const [category,setCategory] = useState(book.shelf)
+    const [flip,setFlip] = useState(false)
     const fun = (e)=>{
         setCategory(e.target.value)
         param(e.target.value)
+        setFlip(!flip)
     }
     const update = async ()=>await BookApi.update(book,category);
 
     useEffect(()=>{
-       try {
-           update();
-       }catch (err){
-           console.log("error")
-       }
+        update();
+
        return ()=>{
 
        }
 
     },[category])
+    var image = book.imageLinks
+    if (image){
+        image = image.smallThumbnail?image.smallThumbnail:null
+    }
     return (
         <div className="book">
             <div className="book-top">
@@ -30,7 +33,7 @@ function Book({book,param}){
                     style={{
                         width: 128,
                         height: 193,
-                        backgroundImage: 'url('+book.imageLinks.thumbnail+')'
+                        backgroundImage: 'url('+image+')'
                     }}
                 ></div>
                 <div className="book-shelf-changer">
@@ -47,8 +50,8 @@ function Book({book,param}){
                     </select>
                 </div>
             </div>
-            <div className="book-title">{book.title}</div>
-            <div className="book-authors">{book.authors[0]}</div>
+            <div className="book-title">{book?book.title:null}</div>
+            <div className="book-authors">{book.authors?book.authors.join(", "):book.authors}</div>
         </div>
     )
 }

@@ -19,9 +19,8 @@ function Shelves({param}) {
             setRead(res.filter(e=>e.shelf==="read"))
         }
 
-        let value = setTimeout(getAll,1000)
+        getAll()
         return ()=>{
-            clearTimeout(value)
         }
     },[category,param])
     return (
