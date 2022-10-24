@@ -43,7 +43,7 @@ function SearchBooks({param}) {
                     <ol className="books-grid">
                         {books.length>0?
                             <List_books list={books} param={param}/>:
-                            <p>no books</p>
+                            <p>no books found</p>
                         }
                     </ol>
                 </div>
