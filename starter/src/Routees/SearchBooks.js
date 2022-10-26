@@ -8,11 +8,10 @@ function SearchBooks({param}) {
     const [books , setBooks] = useState([])
     useEffect(()=>{
         const search = async ()=>{
-            if (text==='')return
             const res = await BookApi.search(text,20)
             setBooks(res)
         }
-        let value = setTimeout(search,1000)
+        let value = setTimeout(search,500)
         return ()=>{
             clearTimeout(value)
         }
@@ -41,9 +40,8 @@ function SearchBooks({param}) {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {books.length>0?
-                            <List_books list={books} param={param}/>:
-                            <p>no books found</p>
+                        {books?books.length>0?
+                            <List_books list={books} param={param}/>:<p>no search results</p>:books
                         }
                     </ol>
                 </div>

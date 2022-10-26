@@ -37,7 +37,7 @@ function Book({book,param}){
                     }}
                 ></div>
                 <div className="book-shelf-changer">
-                    <select value={"none"} onChange={e=>fun(e)}>
+                    <select value={book.shelf} onChange={e=>fun(e)}>
                         <option value="none" disabled>
                             Move to...
                         </option>
