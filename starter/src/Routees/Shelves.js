@@ -8,17 +8,14 @@ function Shelves({param}) {
     const [read , setRead] = useState([])
     const [want_to_read , setWant_to_read] = useState([])
     const [category,setCategory] = useState('')
-    const fun = (e)=>{
-        setCategory(e)
-    }
-    useEffect( ()=>{
-        const getAll =async ()=> {
-            const res =await BookApi.getAll()
-            setCurrently_reading(res.filter(e=>e.shelf==="currentlyReading"))
-            setWant_to_read(res.filter(e=>e.shelf==="wantToRead"))
-            setRead(res.filter(e=>e.shelf==="read"))
-        }
 
+    useEffect( ()=>{
+        const getAll = async ()=> {
+            const res = await BookApi.getAll()
+            setCurrently_reading(res.filter(e => e.shelf === "currentlyReading"))
+            setWant_to_read(res.filter(e => e.shelf === "wantToRead"))
+            setRead(res.filter(e => e.shelf === "read"))
+        }
         getAll()
         return ()=>{
         }
@@ -33,19 +30,19 @@ function Shelves({param}) {
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Currently Reading</h2>
                         <div className="bookshelf-books">
-                            <List_books list={currently_reading} param={fun}/>
+                            <List_books list={currently_reading} param={setCategory}/>
                         </div>
                     </div>
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Want to Read</h2>
                         <div className="bookshelf-books">
-                            <List_books list={want_to_read} param={fun}/>
+                            <List_books list={want_to_read} param={setCategory}/>
                         </div>
                     </div>
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Read</h2>
                         <div className="bookshelf-books">
-                            <List_books list={read} param={fun}/>
+                            <List_books list={read} param={setCategory}/>
                         </div>
                     </div>
                 </div>

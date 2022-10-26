@@ -18,7 +18,7 @@ function SearchBooks({param}) {
     },[text])
 
     const getData=(e)=>{
-        setText(e.target.value.trim());
+        setText(e.target.value);
     }
     return (
             <div className="search-books">
